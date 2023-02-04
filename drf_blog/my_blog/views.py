@@ -9,22 +9,31 @@ from .serializers import PostListSerializer, PostDetailSerializer
 from .models import *
 # from .permissons import IsAdminOrReadOnly
 
-class PostListView(APIView):
+
+class PostListView(generics.ListCreateAPIView):
     '''Вывод списка постов'''
-    def get(self, request):
-        post = Post.objects.all()
-        serializer = PostListSerializer(post, many=True) 
-        return Response(serializer.data)
+    queryset = Post.objects.all()
+    serializer_class = PostListSerializer
 
 
-class PostDetailView(APIView):
-    '''Вывод инфы о посте'''
-    def get(self, request, pk):
-        post = Post.objects.get(id=pk)
-        serializer = PostDetailSerializer(post) 
-        return Response(serializer.data)        
+class PostUpdate(generics.UpdateAPIView):
+    '''Update post'''
+    queryset = Post.objects.all()
+    serializer_class = PostListSerializer
 
 
+# class PostDetailView(APIView):
+#     '''Вывод инфы о посте'''
+#     def get(self, request, pk):
+#         post = Post.objects.get(id=pk)
+#         serializer = PostDetailSerializer(post) 
+#         return Response(serializer.data)        
+
+
+class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+    '''Read, Update and Delete post'''
+    queryset = Post.objects.all()
+    serializer_class = PostListSerializer
 
 
 # class PostPagination(PageNumberPagination):
