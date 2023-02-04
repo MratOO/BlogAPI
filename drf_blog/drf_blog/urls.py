@@ -19,14 +19,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
-from my_blog.views import *
 
-router = routers.SimpleRouter()
-router.register(r'post', PostViewSet)
+# from my_blog.views import *
+
+# router = routers.SimpleRouter()
+# router.register(r'post', PostViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/v1/', include(router.urls)),
- ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api/v1/', include('my_blog.urls')),
+] 
+
+ 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
