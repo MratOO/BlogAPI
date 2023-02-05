@@ -2,11 +2,12 @@ from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 
+from .permissons import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from .serializers import PostListSerializer, PostDetailSerializer
 from .models import *
-# from .permissons import IsAdminOrReadOnly
 
 
 # class PostPagination(PageNumberPagination):
@@ -15,11 +16,13 @@ from .models import *
 #     page_query_param = 'page_size'
 #     max_page_size = 100
 
+
 class PostViewSet(viewsets.ModelViewSet):
     '''CRUD'''
     #queryset = Post.objects.all()
     serializer_class = PostListSerializer
     #pagination_class = PostPagination
+    permission_classes = (IsAdminOrReadOnly, IsOwnerOrReadOnly) # доступ
     
 
     def get_queryset(self):

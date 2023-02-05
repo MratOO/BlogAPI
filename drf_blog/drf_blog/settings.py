@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer' # даёт изменять данные в браузере
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated', # доступ к данным только авторизованным пользователям
     ],
     'DEFAULT_PAGINATION_CLASS' : 
         'rest_framework.pagination.LimitOffsetPagination',
