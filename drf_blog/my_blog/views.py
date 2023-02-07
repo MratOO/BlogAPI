@@ -2,8 +2,11 @@ from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
-
+from rest_framework.permissions import (
+    IsAuthenticatedOrReadOnly,
+    IsAdminUser,
+    IsAuthenticated
+    )
 
 from .permissons import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from .serializers import PostListSerializer, PostDetailSerializer
@@ -22,7 +25,8 @@ class PostViewSet(viewsets.ModelViewSet):
     #queryset = Post.objects.all()
     serializer_class = PostListSerializer
     #pagination_class = PostPagination
-    permission_classes = (IsAdminOrReadOnly, IsOwnerOrReadOnly) # доступ
+    permission_classes = (IsAdminOrReadOnly, IsOwnerOrReadOnly) # доступ 
+    # authentication_classes =  доступ по определенной авторизации
     
 
     def get_queryset(self):
