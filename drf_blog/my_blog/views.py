@@ -13,18 +13,18 @@ from .serializers import PostListSerializer, PostDetailSerializer
 from .models import *
 
 
-# class PostPagination(PageNumberPagination):
-#     '''Своя пагинация'''
-#     page_size = 5
-#     page_query_param = 'page_size'
-#     max_page_size = 100
+class PostPagination(PageNumberPagination):
+    '''Своя пагинация'''
+    page_size = 5
+    page_query_param = 'page_size'
+    max_page_size = 100
 
 
 class PostViewSet(viewsets.ModelViewSet):
     '''CRUD'''
     # queryset = Post.objects.all()  раскомментить при jwt токене
     serializer_class = PostListSerializer
-    # pagination_class = PostPagination
+    pagination_class = PostPagination
     permission_classes = (IsAuthenticated,) # доступ IsAdminOrReadOnly, IsOwnerOrReadOnly
     # authentication_classes =  доступ по определенной авторизации
     
