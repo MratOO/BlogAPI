@@ -22,12 +22,14 @@ from .models import *
 
 class PostViewSet(viewsets.ModelViewSet):
     '''CRUD'''
-    #queryset = Post.objects.all()
+    # queryset = Post.objects.all()  раскомментить при jwt токене
     serializer_class = PostListSerializer
-    #pagination_class = PostPagination
-    permission_classes = (IsAdminOrReadOnly, IsOwnerOrReadOnly) # доступ 
+    # pagination_class = PostPagination
+    permission_classes = (IsAuthenticated,) # доступ IsAdminOrReadOnly, IsOwnerOrReadOnly
     # authentication_classes =  доступ по определенной авторизации
     
+
+# закомментить ниже при jwt токене
 
     def get_queryset(self):
         '''возвращает список определенных данных'''
